@@ -2,55 +2,100 @@
 <html lang="en">
     <head>
         <meta charset="utf8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Links game">
         <meta name="keywords" content="links game">
 
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static "css/styles.css" %}">
+
         <title>Links</title>
 
-        <style type="text/css">
-            .box {
-                float: left;
-                height: 20%;
-                width: 20%;
-                margin-bottom: 15px;
-                border: 1px solid black;
-                clear: both;
-            }
-                
-            .red {
-                background-color: red;
-            }
-                
-            .green {
-                background-color: green;
-            }
-                
-            .blue {
-                background-color: blue;
-            }
-        </style>
     </head>
     <body>
         <div> 
-            <h1> Link the words to correct categories </h1>
+            <h1> LINKS </h1>
         </div>
-        {% if latest_category_list %}
-        <ul>
-        {% for category in latest_category_list %}
-        <div class="box" onclick="changeTileColor(this)">
-        <li><a href="/links_app/{{ category.id }}/">{{ category.category_text }}</a></li>
-        </div>
-        {% endfor %}
-        </ul>
-        {% else %}
-        <p>No categories are available.</p>
+
+        {% if word_list %}
+
+            <section class="layout">
+            {% for word in word_list %}
+                <div class="white_box" onclick="changeTileColor(this)">
+                    <p>{{ word }}</p>
+                </div>
+            {% endfor %}
+            </section>
+
+            {% else %}
+                <p>No categories are available.</p>
+
         {% endif %}
 
         <script>
-            function changeTileColor(element)
-            {
-                element.setAttribute("class", "green");
-            }
+
+            var category_1_list = ["{{ category_1_word_1 }}", "{{ category_1_word_2 }}", "{{ category_1_word_3 }}"];
+            var category_2_list = ["{{ category_2_word_1 }}", "{{ category_2_word_2 }}", "{{ category_2_word_3 }}"];
+            var category_3_list = ["{{ category_3_word_1 }}", "{{ category_3_word_2 }}", "{{ category_3_word_3 }}"];
+    
+            var selectionCount = 0;
+    
+            var result_list = [];
+    
+            var option_1 = "";
+            var option_2 = "";
+            var option_3 = "";
+    
+            function changeTileColor(element) {
+    
+                if (element.getAttribute("class") == "white_box" && selectionCount == 0) {
+                    element.setAttribute("class", "green_box");
+                    option_1 = element.innerText;
+                    selectionCount++;
+                }
+                else if (element.getAttribute("class") == "white_box" && selectionCount == 1) {
+                    element.setAttribute("class", "green_box");
+                    option_2 = element.innerText;
+                    selectionCount++;
+                }
+                else if (element.getAttribute("class") == "white_box" && selectionCount == 2) {
+                    element.setAttribute("class", "green_box");
+                    option_3 = element.innerText;
+                    selectionCount++;
+                }
+                else if (element.getAttribute("class") == "green_box" && selectionCount == 3) {
+                    element.setAttribute("class", "white_box");
+                    option_3 = "";
+                    selectionCount--;
+                }
+                else if (element.getAttribute("class") == "green_box" && selectionCount == 2) {
+                    element.setAttribute("class", "white_box");
+                    option_2 = "";
+                    selectionCount--;
+                }
+                else if (element.getAttribute("class") == "green_box" && selectionCount == 1) {
+                    element.setAttribute("class", "white_box");
+                    option_1 = "";
+                    selectionCount--;
+                }
+    
+//                if (selectionCount == 3) {
+//                    result_list = [];
+//                    result_list = [option_1, option_2, option_3];
+//    
+//                    if (result_list.sort().join() == category_1_list.sort().join()) {
+//                        element.setAttribute("class", "yellow_box");
+//                    }
+//    
+//                    else if (result_list.sort().join() == category_2_list.sort().join()) {
+//                        element.setAttribute("class", "yellow_box");
+//                    }
+//    
+//                    else if (result_list.sort().join() == category_3_list.sort().join()) {
+//                        element.setAttribute("class", "yellow_box");
+//                    }
+//                }
+            } 
         </script>
     </body>
 </html>
