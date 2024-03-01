@@ -53,48 +53,65 @@
                     option_1 = element.innerText;
                     selectionCount++;
                 }
+
                 else if (element.getAttribute("class") == "white_box" && selectionCount == 1) {
                     element.setAttribute("class", "green_box");
                     option_2 = element.innerText;
                     selectionCount++;
                 }
+
                 else if (element.getAttribute("class") == "white_box" && selectionCount == 2) {
                     element.setAttribute("class", "green_box");
                     option_3 = element.innerText;
                     selectionCount++;
                 }
+
                 else if (element.getAttribute("class") == "green_box" && selectionCount == 3) {
                     element.setAttribute("class", "white_box");
                     option_3 = "";
                     selectionCount--;
                 }
+
                 else if (element.getAttribute("class") == "green_box" && selectionCount == 2) {
                     element.setAttribute("class", "white_box");
                     option_2 = "";
                     selectionCount--;
                 }
+
                 else if (element.getAttribute("class") == "green_box" && selectionCount == 1) {
                     element.setAttribute("class", "white_box");
                     option_1 = "";
                     selectionCount--;
                 }
     
-//                if (selectionCount == 3) {
-//                    result_list = [];
-//                    result_list = [option_1, option_2, option_3];
-//    
-//                    if (result_list.sort().join() == category_1_list.sort().join()) {
-//                        element.setAttribute("class", "yellow_box");
-//                    }
-//    
-//                    else if (result_list.sort().join() == category_2_list.sort().join()) {
-//                        element.setAttribute("class", "yellow_box");
-//                    }
-//    
-//                    else if (result_list.sort().join() == category_3_list.sort().join()) {
-//                        element.setAttribute("class", "yellow_box");
-//                    }
-//                }
+                if (selectionCount == 3) {
+                    result_list = [];
+                    result_list = [option_1, option_2, option_3];
+    
+                    if (result_list.sort().join() == category_1_list.sort().join()) {
+                        for (const elem of document.querySelectorAll(".green_box")) {
+                            //elem.setAttribute("class", "gold_box");
+                            elem.setAttribute("hidden", true);
+                          }
+                          selectionCount = 0;
+                    }
+    
+                    else if (result_list.sort().join() == category_2_list.sort().join()) {
+                        for (const elem of document.querySelectorAll(".green_box")) {
+                            //elem.setAttribute("class", "gold_box");
+                            elem.setAttribute("hidden", true);
+                          }
+                          selectionCount = 0;
+                    }
+    
+                    else if (result_list.sort().join() == category_3_list.sort().join()) {
+                        for (const elem of document.querySelectorAll(".green_box")) {
+                            //elem.setAttribute("class", "gold_box");
+                            elem.setAttribute("hidden", true);
+                          }
+                          selectionCount = 0;
+                    }
+                }
             } 
         </script>
     </body>
