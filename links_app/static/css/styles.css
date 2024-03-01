@@ -46,13 +46,7 @@ body {
     }
     
     .gold_box {
-        color: rgb(233, 220, 46);
-        aspect-ratio: 1;
-        margin: 3%;
-        border: 2px solid rgb(233, 220, 46);
-        border-radius: 7px;
-        float: center;
-        background-color: rgb(233, 220, 46);
+        display: none;
     }
     
     h1 {
@@ -120,13 +114,7 @@ body {
     }
     
     .gold_box {
-        color: rgb(233, 220, 46);
-        aspect-ratio: 1;
-        margin: 3%;
-        border: 2px solid rgb(233, 220, 46);
-        border-radius: 7px;
-        float: center;
-        background-color: rgb(233, 220, 46);
+        display: none;
     }
     
     h1 {
