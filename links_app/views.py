@@ -5,12 +5,12 @@ from django.views.decorators.http import require_POST
 import random
 from .models import Category
 
-def index(request):
-    all_categories = Category.objects.count()
-    latest_category_1 = Category.objects.get(id=all_categories)
-    latest_category_2 = Category.objects.get(id=all_categories-1)
-    latest_category_3 = Category.objects.get(id=all_categories-2)
+all_categories = Category.objects.count()
+latest_category_1 = Category.objects.get(id=all_categories)
+latest_category_2 = Category.objects.get(id=all_categories-1)
+latest_category_3 = Category.objects.get(id=all_categories-2)
 
+def index(request):
     category_1_word_1 = latest_category_1.word_1
     category_1_word_2 = latest_category_1.word_2
     category_1_word_3 = latest_category_1.word_3
@@ -66,12 +66,23 @@ def check_results(request):
     sorted_category2 = sorted(category2)
     sorted_category3 = sorted(category3)
 
-    if (sorted_user_results == sorted_category1 or sorted_user_results == sorted_category2 or sorted_user_results == sorted_category3):
+
+    if (sorted_user_results == sorted_category1):
         result = True
+        correct_category = latest_category_1.category_text
+
+    if (sorted_user_results == sorted_category2):
+        result = True
+        correct_category = latest_category_2.category_text
+
+    if (sorted_user_results == sorted_category3):
+        result = True
+        correct_category = latest_category_3.category_text
     
     if (result == True):
         return JsonResponse({
             'status':'Correct',
+            'category': correct_category
         })
     else:
         return JsonResponse({
