@@ -16,6 +16,8 @@ var tile_text_1 = [];
 var tile_text_2 = [];
 var tile_text_3 = [];
 
+var correct_answers = 0;
+
 function changeTileColor(element) {
 
     if (element.getAttribute("class") == "white_box" && selectionCount == 0) {
@@ -78,6 +80,9 @@ function changeTileColor(element) {
                     for (var elem of document.querySelectorAll(".green_box")) {
                         elem.setAttribute("class", "gold_box");
                       }
+                      correct_answers++;
+                      document.getElementById("layout").setAttribute("class", "layout" + correct_answers.toString());
+                      showAnswer(result_list, response.category);
                       selectionCount = 0;
                 } else {
                     // Do something with errors
@@ -85,3 +90,21 @@ function changeTileColor(element) {
         });
     }
 } 
+
+function showAnswer(results, correct_category) {
+    if (correct_answers == 1) {
+        var elem = document.getElementById("answer_box1")
+        elem.setAttribute("class", "answer_box");
+        elem.innerText = correct_category + "\n" + results[0] + ", " + results[1] + ", " + results[2];
+    }
+    else if (correct_answers == 2) {
+        var elem = document.getElementById("answer_box2")
+        elem.setAttribute("class", "answer_box");
+        elem.innerText = correct_category + "\n" + results[0] + ", " + results[1] + ", " + results[2];
+    }
+    else if (correct_answers == 3) {
+        var elem = document.getElementById("answer_box3")
+        elem.setAttribute("class", "answer_box");
+        elem.innerText = correct_category + "\n" + results[0] + ", " + results[1] + ", " + results[2];
+    }
+}

@@ -20,7 +20,7 @@
 
         {% if word_list %}
 
-            <section class="layout">
+            <section class="layout" id="layout">
             {% for word in word_list %}
                 <div class="white_box" onclick="changeTileColor(this)">
                     <p>{{ word }}</p>
@@ -32,6 +32,12 @@
                 <p>No categories are available.</p>
 
         {% endif %}
+
+        <section class="answer_layout">
+                <div class="hidden_box" id="answer_box1"> Answer </div>
+                <div class="hidden_box" id="answer_box2"> Answer </div>
+                <div class="hidden_box" id="answer_box3"> Answer </div>
+        </section>
 
         <script src="{% static "js/scripts.js" %}"></script>
         <script type="text/javascript">
