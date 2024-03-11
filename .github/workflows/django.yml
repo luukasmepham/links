@@ -29,7 +29,7 @@ jobs:
       env:
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
       run: |
-        python manage.py runserver
+        python manage.py collectstatic && python manage.py runserver
     - name: Run Tests
       run: |
         python -m robot --outputdir ./tests/results tests/Tests.robot
