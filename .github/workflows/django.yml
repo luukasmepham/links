@@ -25,11 +25,14 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+    - name: Collect Static Files
+      run: |
+        python manage.py collectstatic
     - name: Run Webserver
       env:
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
       run: |
-        python manage.py collectstatic && python manage.py runserver
+        python manage.py runserver
     - name: Run Tests
       run: |
         python -m robot --outputdir ./tests/results tests/Tests.robot
