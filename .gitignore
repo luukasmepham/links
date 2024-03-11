@@ -1,4 +1,5 @@
-.env
-/static
 __pycache__
+.env
 /.vscode
+/static
+tests/results
