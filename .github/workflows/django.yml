@@ -28,11 +28,9 @@ jobs:
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
       run: |
         python manage.py collectstatic
-    - name: Run Webserver
+    - name: Start Webserver And Run Tests
       env:
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
       run: |
-        python manage.py runserver
-    - name: Run Tests
-      run: |
+        python manage.py runserver &
         python -m robot --outputdir ./tests/results tests/Tests.robot
