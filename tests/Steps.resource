@@ -9,21 +9,27 @@ user is in ${expression} and tile selection count is 0
     Should Be Equal    ${expression}    ${url}
     Should Be Equal    ${selection_count}    ${0}
 
-user selects the tile number ${expression} and the tile color is white
+user selects the tile number ${expression} and the tile color is ${expected_color}
     Create Selector    ${expression}
     ${selector} =  Get Selector
     ${class} =    Get Element Attribute    ${selector}        class
     Set Tile Color    ${class}
     ${color} =    Get Tile Color
-    Should Be Equal    ${color}    white
+    Should Be Equal    ${color}    ${expected_color}
     Click Element    ${selector}
-    Add To Selection Count
     ${class} =    Get Element Attribute    ${selector}        class
     Set Tile Color    ${class}
+    ${set_color} =    Get Tile Color
 
-the tile number ${expression} is selected and its color is green
+    IF  "${set_color}" == "green"
+        Add To Selection Count
+    ELSE IF  "${set_color}" == "white"
+        Remove From Selection Count
+    END
+
+the tile number ${expression} is selected and its color is ${expected_color}
     Create Selector    ${expression}
     ${selector} =  Get Selector
     ${class} =    Get Element Attribute    ${selector}        class
     ${color} =    Get Tile Color
-    Should Be Equal    ${color}    green
+    Should Be Equal    ${color}    ${expected_color}

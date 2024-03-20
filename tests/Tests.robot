@@ -11,8 +11,18 @@ Test Teardown  Close All Browsers
 *** Test Cases ***
 User selects a tile
     [tags]  smoke
-    [Documentation]  User navigates into Links and selects the first tile of the grid
+    [Documentation]  User navigates into Links and selects a tile from the grid
     Maximize Browser Window
     Given user is in ${TestVariables.url} and tile selection count is 0
     When user selects the tile number ${TestVariables.tile} and the tile color is white
     Then the tile number ${TestVariables.tile} is selected and its color is green
+
+User unselects a tile
+    [tags]  smoke
+    [Documentation]  User navigates into Links and unselects a tile from the grid
+    Maximize Browser Window
+    Given user is in ${TestVariables.url} and tile selection count is 0
+    When user selects the tile number ${TestVariables.tile} and the tile color is white
+    Then the tile number ${TestVariables.tile} is selected and its color is green
+    And user selects the tile number ${TestVariables.tile} and the tile color is green
+    Then the tile number ${TestVariables.tile} is selected and its color is white
